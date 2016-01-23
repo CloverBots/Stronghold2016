@@ -1,18 +1,20 @@
 #include "WPILib.h"
+#include "FuncCommand.h"
 #include "Commands/Command.h"
 #include "CommandBase.h"
 
-class Robot: public IterativeRobot
+class Robot : public IterativeRobot
 {
 private:
+
 	std::unique_ptr<Command> autonomousCommand;
-	SendableChooser *chooser;
+	std::unique_ptr<SendableChooser> chooser;
 
 	void RobotInit()
 	{
 		CommandBase::init();
-		chooser = new SendableChooser();
-		SmartDashboard::PutData("Autonomous Modes", chooser);
+		chooser = std::make_unique<SendableChooser>();
+		SmartDashboard::PutData("Autonomous Modes", chooser.get());
 	}
 
 	void DisabledInit()
@@ -35,7 +37,7 @@ private:
 
 		autonomousCommand.reset((Command *)chooser->GetSelected());
 
-		if (autonomousCommand != NULL)
+		if (autonomousCommand)
 			autonomousCommand->Start();
 	}
 
@@ -46,7 +48,7 @@ private:
 
 	void TeleopInit()
 	{
-		if (autonomousCommand != NULL)
+		if (autonomousCommand)
 			autonomousCommand->Cancel();
 	}
 
