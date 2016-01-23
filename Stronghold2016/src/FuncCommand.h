@@ -4,13 +4,22 @@
 #include "CommandBase.h"
 #include "WPILib.h"
 
+template <typename T>
 class FuncCommand: public CommandBase
 {
 private:
-	std::function<void(void*)> m_func;
-	void* m_pParam;
+	std::function<void(T)> m_func;
+	T m_param;
 public:
-	FuncCommand(std::shared_ptr<Subsystem> pSubsystem, std::function<void(void*)> func, void* pParam);
+	FuncCommand(std::function<void(T)> func, T param) : m_func(func), m_param(param) { }
+	FuncCommand(std::function<void(T)> func, T param, std::initializer_list<std::shared_ptr<Subsystem>> subsystems)
+		: FuncCommand(func, param)
+	{
+		for (std::shared_ptr<Subsystem> pSubsystem : subsystems)
+				Requires(pSubsystem.get());
+	}
+	FuncCommand(std::function<void(T)> func, T param, std::shared_ptr<Subsystem> pSubsystem)
+		: FuncCommand(func, param, {pSubsystem}) { }
 	void Initialize();
 	void Execute();
 	bool IsFinished();
