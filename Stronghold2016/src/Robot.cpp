@@ -19,6 +19,7 @@ private:
 
 	void DisabledInit()
 	{
+		CommandBase::pPIDWesternDrive->SetEnabled(false);
 	}
 
 	void DisabledPeriodic()
@@ -28,6 +29,7 @@ private:
 
 	void AutonomousInit()
 	{
+		CommandBase::pPIDWesternDrive->SetEnabled(true);
 		/* std::string autoSelected = SmartDashboard::GetString("Auto Selector", "Default");
 		if(autoSelected == "My Auto") {
 			autonomousCommand.reset(new MyAutoCommand());
@@ -48,6 +50,8 @@ private:
 
 	void TeleopInit()
 	{
+		CommandBase::pPIDWesternDrive->SetEnabled(true);
+
 		if (autonomousCommand)
 			autonomousCommand->Cancel();
 	}

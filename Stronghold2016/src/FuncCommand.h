@@ -8,9 +8,12 @@ template <typename T>
 class FuncCommand: public CommandBase
 {
 private:
+
 	std::function<void(T)> m_func;
 	T m_param;
+
 public:
+
 	FuncCommand(std::function<void(T)> func, T param) : m_func(func), m_param(param) { }
 	FuncCommand(std::function<void(T)> func, T param, std::initializer_list<std::shared_ptr<Subsystem>> subsystems)
 		: FuncCommand(func, param)
@@ -25,6 +28,7 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+
 };
 
 #endif
