@@ -1,5 +1,6 @@
 #include "PIDWesternDrive.h"
 #include "../RobotMap.h"
+#include "../Commands/DriveFromInput.h"
 
 PIDWesternDrive::PIDWesternDrive() :
 		Subsystem("ExampleSubsystem")
@@ -24,7 +25,7 @@ PIDWesternDrive::PIDWesternDrive() :
 
 void PIDWesternDrive::InitDefaultCommand()
 {
-
+	SetDefaultCommand(new DriveFromInput());
 }
 
 void PIDWesternDrive::SetEnabled(bool enabled)
