@@ -5,11 +5,15 @@
 PIDWesternDrive::PIDWesternDrive() :
 		Subsystem("ExampleSubsystem")
 {
-	m_pLeftEncoder.reset(new Encoder(RobotMap::DRIVE_LEFT_ENCODER_A, RobotMap::DRIVE_LEFT_ENCODER_B, false, Encoder::EncodingType::k4X));
+	m_pLeftEncoder.reset(new Encoder(RobotMap::DRIVE_LEFT_ENCODER_A, RobotMap::DRIVE_LEFT_ENCODER_B,
+			false, Encoder::EncodingType::k4X));
 	m_pLeftEncoder->SetPIDSourceType(PIDSourceType::kRate);
+	m_pLeftEncoder->SetDistancePerPulse(m_DISTANCE_PER_PULSE);
 
-	m_pRightEncoder.reset(new Encoder(RobotMap::DRIVE_RIGHT_ENCODER_A, RobotMap::DRIVE_RIGHT_ENCODER_B, false, Encoder::EncodingType::k4X));
+	m_pRightEncoder.reset(new Encoder(RobotMap::DRIVE_RIGHT_ENCODER_A, RobotMap::DRIVE_RIGHT_ENCODER_B,
+			false, Encoder::EncodingType::k4X));
 	m_pRightEncoder->SetPIDSourceType(PIDSourceType::kRate);
+	m_pRightEncoder->SetDistancePerPulse(m_DISTANCE_PER_PULSE);
 
 	m_pLeftPIDOutput.reset(new MultiPIDOutput());
 	m_pLeftPIDOutput->AddTalon(RobotMap::DRIVE_FRONT_LEFT_MOTOR);
@@ -50,6 +54,37 @@ void PIDWesternDrive::SetEnabled(bool enabled)
 
 void PIDWesternDrive::SetSpeed(float speed, float rotation)
 {
+	if (m_pLeftEncoder->GetPIDSourceType() == PIDSourceType::kDisplacement)
+		m_pLeftEncoder->SetPIDSourceType(PIDSourceType::kRate);
+
+	if (m_pRightEncoder->GetPIDSourceType() == PIDSourceType::kDisplacement)
+		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kRate);
+
 	m_pRightController->SetSetpoint(speed + rotation);
 	m_pLeftController->SetSetpoint(speed - rotation);
+}
+
+void PIDWesternDrive::DriveForDistance(float distanceInFeet)
+{
+	if (m_pLeftEncoder->GetPIDSourceType() == PIDSourceType::kRate)
+		m_pLeftEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
+
+	if (m_pRightEncoder->GetPIDSourceType() == PIDSourceType::kRate)
+		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
+
+	float setpoint = 2.0f * m_WHEEL_RADIUS * M_PI * (distanceInFeet / 12.0f);
+
+	m_pLeftController->SetSetpoint(setpoint);
+	m_pRightController->SetSetpoint(setpoint);
+}
+
+void PIDWesternDrive::TurnAngle(float angle)
+{
+	if (m_pLeftEncoder->GetPIDSourceType() == PIDSourceType::kRate)
+		m_pLeftEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
+
+	if (m_pRightEncoder->GetPIDSourceType() == PIDSourceType::kRate)
+		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
+
+	// TODO: Figure out mathematics.
 }

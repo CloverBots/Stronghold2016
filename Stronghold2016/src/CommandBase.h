@@ -4,6 +4,7 @@
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/PIDWesternDrive.h"
+#include "Subsystems/LiftMechanism.h"
 #include "OI.h"
 #include "WPILib.h"
 
@@ -20,6 +21,7 @@ public:
 	static void init();
 	// Create a single static instance of all of your subsystems
 	static std::unique_ptr<PIDWesternDrive> pPIDWesternDrive;
+	static std::unique_ptr<LiftMechanism> pLiftMechanism;
 
 	static std::unique_ptr<OI> oi;
 };
