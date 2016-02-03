@@ -48,8 +48,8 @@ void PIDWesternDrive::SetEnabled(bool enabled)
 	}
 }
 
-void PIDWesternDrive::SetSpeed(float speed, float angle)
+void PIDWesternDrive::SetSpeed(float speed, float rotation)
 {
-	m_pRightController->SetSetpoint(speed + angle);
-	m_pLeftController->SetSetpoint(speed - angle);
+	m_pRightController->SetSetpoint(speed + rotation);
+	m_pLeftController->SetSetpoint(speed - rotation);
 }

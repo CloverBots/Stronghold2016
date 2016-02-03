@@ -28,7 +28,7 @@ public:
 	void InitDefaultCommand();
 
 	void SetEnabled(bool enabled);
-	void SetSpeed(float speed, float angle);
+	void SetSpeed(float speed, float rotation);
 
 };
 

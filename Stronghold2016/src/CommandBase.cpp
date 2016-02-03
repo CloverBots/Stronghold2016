@@ -13,7 +13,6 @@ CommandBase::CommandBase(const std::string &name) :
 CommandBase::CommandBase() :
 		Command()
 {
-
 }
 
 void CommandBase::init()
