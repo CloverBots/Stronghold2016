@@ -13,6 +13,7 @@ private:
 
 	std::shared_ptr<JoystickButton> m_pBackButton;
 	std::shared_ptr<JoystickButton> m_pStartButton;
+	std::shared_ptr<JoystickButton> m_pAButton;
 
 public:
 	OI();

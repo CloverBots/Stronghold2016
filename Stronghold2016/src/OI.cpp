@@ -1,5 +1,6 @@
 #include "OI.h"
 #include "Commands/SetLiftSpeed.h"
+#include "Commands/SetShooterSpeed.h"
 
 OI::OI()
 {
@@ -10,12 +11,16 @@ OI::OI()
 
 	m_pStartButton.reset(new JoystickButton(m_pStickyShoot.get(), 8));
 	m_pBackButton.reset(new JoystickButton(m_pStickyShoot.get(), 7));
+	m_pAButton.reset(new JoystickButton(m_pStickyShoot.get(), 1));
 
 	m_pStartButton->WhenPressed(new SetLiftSpeed(-1.0f));
 	m_pStartButton->WhenReleased(new SetLiftSpeed(0.0f));
 
 	m_pBackButton->WhenPressed(new SetLiftSpeed(1.0f));
 	m_pBackButton->WhenReleased(new SetLiftSpeed(0.0f));
+
+	m_pAButton->WhenPressed(new SetShooterSpeed(-1.0f));
+	m_pAButton->WhenReleased(new SetShooterSpeed(0.0f));
 }
 
 std::vector<double> OI::GetContourValue(std::string value)

@@ -5,6 +5,7 @@
 std::unique_ptr<PIDWesternDrive> CommandBase::pPIDWesternDrive;
 std::unique_ptr<LiftMechanism> CommandBase::pLiftMechanism;
 std::unique_ptr<Arm> CommandBase::pArm;
+std::unique_ptr<Shooter> CommandBase::pShooter;
 std::unique_ptr<OI> CommandBase::oi;
 
 CommandBase::CommandBase(const std::string &name) :
@@ -24,6 +25,7 @@ void CommandBase::init()
 	pPIDWesternDrive.reset(new PIDWesternDrive());
 	pLiftMechanism.reset(new LiftMechanism());
 	pArm.reset(new Arm());
+	pShooter.reset(new Shooter());
 
 	oi.reset(new OI());
 }

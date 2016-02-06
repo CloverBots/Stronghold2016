@@ -18,7 +18,8 @@ struct RobotMap
 		DRIVE_REAR_RIGHT_MOTOR = 3,
 		LIFT_MOTOR = 4,
 		ARM_LIFT_MOTOR = 5,
-		ARM_COLLECT_MOTOR = 6;
+		ARM_COLLECT_MOTOR = 6,
+		SHOOT_MOTOR = 7;
 };
 
 #endif

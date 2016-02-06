@@ -6,6 +6,7 @@
 #include "Subsystems/PIDWesternDrive.h"
 #include "Subsystems/LiftMechanism.h"
 #include "Subsystems/Arm.h"
+#include "Subsystems/Shooter.h"
 #include "OI.h"
 #include "WPILib.h"
 
@@ -24,6 +25,7 @@ public:
 	static std::unique_ptr<PIDWesternDrive> pPIDWesternDrive;
 	static std::unique_ptr<LiftMechanism> pLiftMechanism;
 	static std::unique_ptr<Arm> pArm;
+	static std::unique_ptr<Shooter> pShooter;
 
 	static std::unique_ptr<OI> oi;
 };
