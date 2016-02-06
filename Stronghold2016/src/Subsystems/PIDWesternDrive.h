@@ -13,7 +13,7 @@ private:
 	const float m_I = 0.5f;
 	const float m_D = 0.0f;
 
-	const double m_DISTANCE_PER_PULSE = 360.0;
+	const double m_DISTANCE_PER_PULSE = 1.0 / 360.0;
 	const float m_WHEEL_RADIUS = 4.875f;
 	const float m_ROBOT_RADIUS = 13.0f;
 

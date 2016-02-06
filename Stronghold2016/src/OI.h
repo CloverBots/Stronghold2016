@@ -18,6 +18,7 @@ public:
 	OI();
 	std::vector<double> GetContourValue(std::string value);
 	std::shared_ptr<Joystick> GetStickyDrive();
+	std::shared_ptr<Joystick> GetStickyShoot();
 };
 
 #endif

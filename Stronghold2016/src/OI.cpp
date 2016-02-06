@@ -27,3 +27,8 @@ std::shared_ptr<Joystick> OI::GetStickyDrive()
 {
 	return m_pStickyDrive;
 }
+
+std::shared_ptr<Joystick> OI::GetStickyShoot()
+{
+	return m_pStickyShoot;
+}

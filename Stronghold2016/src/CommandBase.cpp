@@ -4,6 +4,7 @@
 // Initialize a single static instance of all of your subsystems to NULL
 std::unique_ptr<PIDWesternDrive> CommandBase::pPIDWesternDrive;
 std::unique_ptr<LiftMechanism> CommandBase::pLiftMechanism;
+std::unique_ptr<Arm> CommandBase::pArm;
 std::unique_ptr<OI> CommandBase::oi;
 
 CommandBase::CommandBase(const std::string &name) :
@@ -22,6 +23,7 @@ void CommandBase::init()
 	// line should be repeated for each subsystem in the project.
 	pPIDWesternDrive.reset(new PIDWesternDrive());
 	pLiftMechanism.reset(new LiftMechanism());
+	pArm.reset(new Arm());
 
 	oi.reset(new OI());
 }
