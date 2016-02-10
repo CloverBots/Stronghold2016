@@ -72,7 +72,7 @@ void PIDWesternDrive::DriveForDistance(float distanceInFeet)
 	if (m_pRightEncoder->GetPIDSourceType() == PIDSourceType::kRate)
 		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
 
-	float setpoint = 2.0f * m_WHEEL_RADIUS * M_PI * (distanceInFeet / 12.0f);
+	float setpoint = m_WHEEL_CIRCUMFERENCE * (distanceInFeet / 12.0f);
 
 	m_pLeftController->SetSetpoint(setpoint);
 	m_pRightController->SetSetpoint(setpoint);
@@ -86,5 +86,8 @@ void PIDWesternDrive::TurnAngle(float angle)
 	if (m_pRightEncoder->GetPIDSourceType() == PIDSourceType::kRate)
 		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
 
-	// TODO: Figure out mathematics.
+	float setpoint = (m_ROBOT_CIRCUMFERENCE / m_WHEEL_CIRCUMFERENCE) * (angle / 360.0f);
+
+	m_pLeftController->SetSetpoint(setpoint);
+	m_pRightController->SetSetpoint(-setpoint);
 }
