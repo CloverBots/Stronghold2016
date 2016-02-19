@@ -8,7 +8,8 @@ class Shooter: public Subsystem
 {
 private:
 
-	std::unique_ptr<Talon> m_pTalon;
+	std::unique_ptr<Talon> m_pLeftTalon;
+	std::unique_ptr<Talon> m_pRightTalon;
 
 public:
 	Shooter();

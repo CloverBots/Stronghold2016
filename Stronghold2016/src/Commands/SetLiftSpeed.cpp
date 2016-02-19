@@ -8,7 +8,8 @@ SetLiftSpeed::SetLiftSpeed(float speed) : m_speed(speed)
 // Called just before this Command runs the first time
 void SetLiftSpeed::Initialize()
 {
-	CommandBase::pLiftMechanism->SetSpeed(m_speed);
+	CommandBase::pLiftMechanism->SetTapeSpeed(m_speed);
+	CommandBase::pLiftMechanism->SetRopeSpeed(m_speed);
 }
 
 // Called repeatedly when this Command is scheduled to run
