@@ -14,7 +14,7 @@ void OperateArmFromInput::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void OperateArmFromInput::Execute()
 {
-	CommandBase::pArm->SetLiftSpeed(CommandBase::oi->GetStickyShoot()->GetRawAxis(1));
+	CommandBase::pArm->SetLiftSpeed(-CommandBase::oi->GetStickyShoot()->GetRawAxis(1));
 	CommandBase::pArm->SetCollectSpeed(2.0f *
 			(CommandBase::oi->GetStickyShoot()->GetRawAxis(3) -
 			CommandBase::oi->GetStickyShoot()->GetRawAxis(2)));

@@ -25,6 +25,7 @@ public:
 	virtual void PIDWrite(float output);
 
 	void AddTalon(uint8_t port, bool inverted = false);
+	void AddTalon(Talon* pTalon);
 };
 
 #endif /* SRC_MULTIPIDOUTPUT_H_ */

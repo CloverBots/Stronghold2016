@@ -9,13 +9,27 @@ class PIDWesternDrive: public Subsystem
 {
 private:
 
-	const float m_P = 0.5f;
-	const float m_I = 0.5f;
-	const float m_D = 0.0f;
+	enum DriveState
+	{
+		UNINITIALIZED = 0,
+		NO_PID = 1,
+		PID_RATE = 2,
+		PID_DISPLACEMENT = 3
+	} m_currentState = UNINITIALIZED;
 
-	const double m_DISTANCE_PER_PULSE = 1.0 / 360.0;
+	const float m_P = 1.0f;
+	const float m_I = 0.0f;
+	const float m_D = 1.5f;
+
+	const double m_ENCODER_RATE = 3600;
+	const double m_DISTANCE_PER_PULSE = 1.0 / m_ENCODER_RATE;
 	const float m_WHEEL_CIRCUMFERENCE = M_PI * 7.75;
 	const float m_ROBOT_CIRCUMFERENCE = M_PI * 20.8f;
+
+	std::unique_ptr<Talon> m_pFrontLeftTalon;
+	std::unique_ptr<Talon> m_pRearLeftTalon;
+	std::unique_ptr<Talon> m_pFrontRightTalon;
+	std::unique_ptr<Talon> m_pRearRightTalon;
 
 	std::unique_ptr<Encoder> m_pLeftEncoder;
 	std::unique_ptr<Encoder> m_pRightEncoder;
@@ -31,7 +45,10 @@ public:
 	PIDWesternDrive();
 	void InitDefaultCommand();
 
-	void SetEnabled(bool enabled);
+	void ChangeDriveState(DriveState driveState);
+
+	void DisablePID();
+	//void SetEnabled(bool enabled);
 	void SetSpeed(float speed, float rotation);
 	void DriveForDistance(float distanceInFeet);
 	void TurnAngle(float angle);

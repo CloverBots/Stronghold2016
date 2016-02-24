@@ -9,6 +9,7 @@ SetShooterSpeed::SetShooterSpeed(float speed) : m_speed(speed)
 void SetShooterSpeed::Initialize()
 {
 	CommandBase::pShooter->SetSpeed(m_speed);
+//	std::cout << "Speed: " << m_speed << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run

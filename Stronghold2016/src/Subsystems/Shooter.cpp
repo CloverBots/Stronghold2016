@@ -15,5 +15,5 @@ void Shooter::InitDefaultCommand()
 void Shooter::SetSpeed(float speed)
 {
 	m_pLeftTalon->Set(speed);
-	m_pRightTalon->Set(speed);
+	m_pRightTalon->Set(-speed);
 }

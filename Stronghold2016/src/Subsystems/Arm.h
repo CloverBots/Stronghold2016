@@ -8,9 +8,13 @@ class Arm: public Subsystem
 {
 private:
 
-	const float m_P = 0.5f;
-	const float m_I = 0.5f;
+	const float m_P = 1.0f;
+	const float m_I = 0.0f;
 	const float m_D = 0.0f;
+
+	const float m_SPEED_MAG = 0.25f;
+
+	const double m_DISTANCE_PER_PULSE = 0.001;
 
 	std::unique_ptr<Encoder> m_pLiftEncoder;
 
