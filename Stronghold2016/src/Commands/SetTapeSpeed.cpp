@@ -1,35 +1,35 @@
-#include <Commands/SetLiftSpeed.h>
+#include <Commands/SetTapeSpeed.h>
 
-SetLiftSpeed::SetLiftSpeed(float speed) : m_speed(speed)
+SetTapeSpeed::SetTapeSpeed(float speed) : m_speed(speed)
 {
 	Requires(CommandBase::pLiftMechanism.get());
 }
 
 // Called just before this Command runs the first time
-void SetLiftSpeed::Initialize()
+void SetTapeSpeed::Initialize()
 {
 	CommandBase::pLiftMechanism->SetTapeSpeed(m_speed);
-	CommandBase::pLiftMechanism->SetRopeSpeed(m_speed);
+	std::cout << "Set Tape speed: " << m_speed << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
-void SetLiftSpeed::Execute()
+void SetTapeSpeed::Execute()
 {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool SetLiftSpeed::IsFinished()
+bool SetTapeSpeed::IsFinished()
 {
 	return true;
 }
 
 // Called once after isFinished returns true
-void SetLiftSpeed::End()
+void SetTapeSpeed::End()
 {
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void SetLiftSpeed::Interrupted()
+void SetTapeSpeed::Interrupted()
 {
 }

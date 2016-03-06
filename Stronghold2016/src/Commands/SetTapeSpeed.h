@@ -4,7 +4,7 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class SetLiftSpeed: public CommandBase
+class SetTapeSpeed: public CommandBase
 {
 private:
 
@@ -12,7 +12,7 @@ private:
 
 public:
 
-	SetLiftSpeed(float speed);
+	SetTapeSpeed(float speed);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
