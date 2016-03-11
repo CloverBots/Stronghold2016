@@ -48,10 +48,11 @@ public:
 	void ChangeDriveState(DriveState driveState);
 
 	void DisablePID();
-	//void SetEnabled(bool enabled);
 	void SetSpeed(float speed, float rotation);
 	void DriveForDistance(float distanceInFeet);
 	void TurnAngle(float angle);
+
+	//bool SetpointAqcuired();
 
 };
 

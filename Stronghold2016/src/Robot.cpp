@@ -1,6 +1,7 @@
 #include "WPILib.h"
 #include "FuncCommand.h"
 #include "Commands/Command.h"
+#include "Commands/Autonomous.h"
 #include "CommandBase.h"
 
 class Robot : public IterativeRobot
@@ -14,6 +15,8 @@ private:
 	{
 		CommandBase::init();
 		chooser = std::make_unique<SendableChooser>();
+		chooser->AddDefault("Do nothing", 0);
+		chooser->AddObject("Go straight and shoot", new Autonomous());
 		SmartDashboard::PutData("Autonomous Modes", chooser.get());
 	}
 
@@ -39,6 +42,11 @@ private:
 		} */
 
 		autonomousCommand.reset((Command *)chooser->GetSelected());
+
+		if (autonomousCommand)
+			std::cout << "Autonomous valid\n";
+		else
+			std::cout << "Autonomous invalid\n";
 
 		if (autonomousCommand)
 			autonomousCommand->Start();

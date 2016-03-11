@@ -2,10 +2,18 @@
 #include "OI.h"
 #include "Commands/SetShooterSpeed.h"
 #include "Commands/SetRopeSpeed.h"
+#include "Commands/AlignWithGoal.h"
 
 OI::OI()
 {
 	m_pContoursTable = NetworkTable::GetTable("GRIP/myContoursReport");
+
+	CameraServer::GetInstance()->StartAutomaticCapture("cam1");
+	CameraServer::GetInstance()->SetQuality(75);
+
+	m_pUSBCamera.reset(new USBCamera("cam1", true));
+	m_pUSBCamera->SetFPS(15.0);
+	m_pUSBCamera->SetSize(160, 120);
 
 	m_pStickyDrive.reset(new Joystick(0));
 	m_pStickyShoot.reset(new Joystick(1));
@@ -29,8 +37,7 @@ OI::OI()
 	m_pBButton->WhenPressed(new SetShooterSpeed(-0.5f));
 	m_pBButton->WhenReleased(new SetShooterSpeed(0.0f));
 
-	m_pXButton->WhenPressed(new SetShooterSpeed(-0.6f));
-	m_pXButton->WhenReleased(new SetShooterSpeed(0.0f));
+	m_pXButton->WhenPressed(new AlignWithGoal());
 
 	m_pYButton->WhenPressed(new SetShooterSpeed(0.75f));
 	m_pYButton->WhenReleased(new SetShooterSpeed(0.0f));
@@ -49,4 +56,14 @@ std::shared_ptr<Joystick> OI::GetStickyDrive()
 std::shared_ptr<Joystick> OI::GetStickyShoot()
 {
 	return m_pStickyShoot;
+}
+
+int OI::GetCameraXRes() const
+{
+	return m_CAMERA_X_RES;
+}
+
+int OI::GetCameraYRes() const
+{
+	return m_CAMERA_Y_RES;
 }

@@ -51,6 +51,8 @@ void PIDWesternDrive::ChangeDriveState(DriveState driveState)
 		std::cout << "Cannot change DriveState to default \"UNINITIALIZED\"\n";
 		break;
 	case NO_PID:
+		std::cout << "No PID mode entered.\n";
+
 		m_pLeftEncoder->Reset();
 		m_pRightEncoder->Reset();
 
@@ -58,6 +60,8 @@ void PIDWesternDrive::ChangeDriveState(DriveState driveState)
 		m_pRightController->Disable();
 		break;
 	case PID_RATE:
+		std::cout << "Rate mode entered.\n";
+
 		m_pLeftEncoder->SetPIDSourceType(PIDSourceType::kRate);
 		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kRate);
 
@@ -71,6 +75,8 @@ void PIDWesternDrive::ChangeDriveState(DriveState driveState)
 		m_pRightController->SetSetpoint(0.0f);
 		break;
 	case PID_DISPLACEMENT:
+		std::cout << "Displacement mode entered.\n";
+
 		m_pLeftEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
 		m_pRightEncoder->SetPIDSourceType(PIDSourceType::kDisplacement);
 
@@ -112,12 +118,16 @@ void PIDWesternDrive::SetSpeed(float speed, float rotation)
 
 void PIDWesternDrive::DriveForDistance(float distanceInFeet)
 {
+	std::cout << "Drive For Distance: " << distanceInFeet << " begin.\n";
+
 	ChangeDriveState(PID_DISPLACEMENT);
 
 	float setpoint = m_WHEEL_CIRCUMFERENCE * (distanceInFeet / 12.0f);
 
 	m_pLeftController->SetSetpoint(setpoint);
 	m_pRightController->SetSetpoint(-setpoint);
+
+	std::cout << "Drive For Distance: " << distanceInFeet << " end.\n";
 }
 
 void PIDWesternDrive::TurnAngle(float angle)
@@ -129,3 +139,8 @@ void PIDWesternDrive::TurnAngle(float angle)
 	m_pLeftController->SetSetpoint(setpoint);
 	m_pRightController->SetSetpoint(-setpoint);
 }
+
+//bool PIDWesternDrive::SetpointAcquired()
+//{
+//
+//}

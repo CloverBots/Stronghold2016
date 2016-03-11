@@ -29,6 +29,7 @@ public:
 	void End();
 	void Interrupted();
 
+
 };
 
 #endif
